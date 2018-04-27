@@ -88,7 +88,7 @@ implicit none
      else
           nby = nbins
           nbz = nby
-          
+          ! I think this should be 3*a = height of triangle
           dby = (2.0d0*a)/nby
           dbz = dby
      end if
@@ -215,7 +215,7 @@ implicit none
      ! Set initial conditions and internal timestepping.
      !
      
-     call set_initial_conds_triangle_mc(ny,nz,x0n,a,nGates,nTot,X,Y,Z, &
+     call set_initial_conds_triangle_mc(ny,nz,x0n,a,nGates,nTot,X,Y,Z,kappa, &
                               y0,z0,x0width,t_warmup,use_external_ic,ic_file,nl,lls)
 
      call generate_internal_timestepping(ntt,nt,target_times,t_hist,dtmax)
@@ -233,7 +233,7 @@ implicit none
      !
      inext = 1
      tt_idx = 1
-     
+     ! need to check these bounds - we noticed they were wrong
      call accumulate_moments_2d(tt_idx,ntt,nTot,X,Y,Z, &
                -1.0d0,-1.0d0+2*a*dsqrt(3.0d0),-a*dsqrt(3.0d0),a*dsqrt(3.0d0), &
                means,vars,skews,kurts,nby,nbz,means_sl,vars_sl,skews_sl,kurts_sl)
@@ -260,7 +260,8 @@ implicit none
      ! Start the timestepping.
      
      out_msg = 'simul_start'
-     call duct_mc_messages(out_msg,nz)
+     call duct_mc_messages(out_msg,nz) 
+     ! there isn't a triangle_mc_messages version
      
      do kt=2,nt
 
@@ -270,7 +271,7 @@ implicit none
           t = t_hist(kt)
           dt = t_hist(kt) - t_hist(kt-1)
 
-          call apply_advdiff1_triangle(nTot,X,Y,Z,Pe,dt,a, &
+          call apply_advdiff1_triangle(nTot,X,Y,Z,Pe,dt,a,kappa, &
                               u_triangle,impose_reflective_BC_polygon,nl,lls)
 
           

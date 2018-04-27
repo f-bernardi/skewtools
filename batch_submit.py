@@ -9,16 +9,16 @@ import random
 # and location and names for output files.
 # -------------------
 
-execute = "local"   # if "local" then run directly, sequentially.
+execute = "longleaf"   # if "local" then run directly, sequentially.
                     # "bsub" submits jobs to Kure/Killdevil.
                     # "longleaf" submits jobs to Longleaf.
 
-n = 3               # number of trials to run.
-fname_prefix = "ch_"
-parent = "./temp/"
+n = 1               # number of trials to run.
+fname_prefix = "triangle_"
+parent = "./triangle/"
 sim_folder = ""
 
-exe_loc = "./channel_mc"
+exe_loc = "./triangle_mc"
 
 # ------------------
 # More bsub options

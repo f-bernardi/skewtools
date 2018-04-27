@@ -1,4 +1,4 @@
-subroutine apply_advdiff1_triangle(nTot,xv,yv,zv,Pe,dt,a, & 
+subroutine apply_advdiff1_triangle(nTot,xv,yv,zv,Pe,dt,a,kappa, & 
                     flow,reflector,nl,lls)
 
 ! Does the basic advection diffusion operation in the triangle.
@@ -8,7 +8,7 @@ subroutine apply_advdiff1_triangle(nTot,xv,yv,zv,Pe,dt,a, &
 ! advection operator is done first, then diffusion operator.
 !
 ! Arrays X,Y,Z (dimension n) 
-! scalars Pe, dt, a
+! scalars Pe, dt, a, kappa
 !
 ! double precision function flow, 
 ! subroutine reflector.
@@ -21,7 +21,7 @@ implicit none
      ! Inputs/outputs
      integer, intent(in)                                         :: nTot
      double precision, dimension(nTot), intent(inout)            :: xv,yv,zv
-     double precision, intent(in)                                :: Pe,dt,a
+     double precision, intent(in)                                :: Pe,dt,a,kappa
      integer, intent(in)                                         :: nl
      double precision, dimension(nl,3), intent(in)               :: lls
 
@@ -51,7 +51,7 @@ implicit none
      ! Generate the proper white noise in advance.
      ! Note in the ellipse that the variance of the white noise is the 
      ! same in all directions because the nondimensionalization is 'isotropic'.
-     mcvar = 2.0d0*dt
+     mcvar = 2.0d0*dt*kappa
 
 !     write(*,*) dt,mcvar
 

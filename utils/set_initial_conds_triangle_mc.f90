@@ -1,4 +1,4 @@
-subroutine set_initial_conds_triangle_mc(ny,nz,x0n,a,nGates,nTot,X,Y,Z,y0,z0,x0width,t_warmup,&
+subroutine set_initial_conds_triangle_mc(ny,nz,x0n,a,nGates,nTot,X,Y,Z,kappa,y0,z0,x0width,t_warmup,&
                     use_external_ic,ic_file,nl,lls)
 ! Given all the data, specify the initial conditions in the arrays X,Y,Z.
 
@@ -7,7 +7,7 @@ use mod_readbuff
 
 implicit none
      
-     double precision, intent(in)                                :: y0,z0,a,x0width,t_warmup
+     double precision, intent(in)                                :: y0,z0,a,x0width,t_warmup,kappa
      integer, intent(in)                                         :: ny,nz,x0n,nGates,nTot,nl
      double precision, dimension(nl,3), intent(in)               :: lls
      logical, intent(in)                                         :: use_external_ic
@@ -115,7 +115,7 @@ implicit none
           dtw = t_warmup/nsteps
 
           do i=1,nsteps
-               call apply_advdiff1_triangle(nTot,X,Y,Z,0.0d0,dtw,a, &
+               call apply_advdiff1_triangle(nTot,X,Y,Z,0.0d0,dtw,a,kappa, &
                               u_triangle,impose_reflective_BC_polygon,nl,lls)
           end do
 

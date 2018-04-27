@@ -20,7 +20,9 @@ module mod_parameters
      integer, parameter                 :: nhb = 400
 
      ! Scale of the channel: [-a,a]. Not much reason to use anything other than 1.0d0.
-     double precision, parameter        :: a = 1.0d0
+     ! [a] = cm, [kappa] = cm^2/s
+     double precision, parameter        :: a = 5.8d-2 
+     double precision, parameter        :: kappa = 5.7d-6
      double precision                   :: b
      character(len=1024)                :: geometry
      
