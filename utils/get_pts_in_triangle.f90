@@ -27,10 +27,10 @@ implicit none
      ! lie outside the triangle.
 
      rl = -a*dsqrt(3.0d0)
-     rb = -1.0d0
+     rb = -a
 
      hz = 2.0d0*a*dsqrt(3.0d0)/(nz-1)
-     hy = 2.0d0*a*dsqrt(3.0d0)/(ny-1)
+     hy = 3.0d0*a/(ny-1)
      idx = 0
 
      if (nGates .gt. 1) then

@@ -1,4 +1,4 @@
-subroutine apply_advdiff1_triangle(nTot,xv,yv,zv,Pe,dt,a,kappa, & 
+  subroutine apply_advdiff1_triangle(nTot,xv,yv,zv,Pe,dt,a,kappa, & 
                     flow,reflector,nl,lls)
 
 ! Does the basic advection diffusion operation in the triangle.

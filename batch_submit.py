@@ -13,10 +13,10 @@ execute = "longleaf"   # if "local" then run directly, sequentially.
                     # "bsub" submits jobs to Kure/Killdevil.
                     # "longleaf" submits jobs to Longleaf.
 
-n = 1               # number of trials to run.
+n = 100               # number of trials to run.
 fname_prefix = "triangle_"
 parent = "./triangle/"
-sim_folder = ""
+sim_folder = "10mLbis/"
 
 exe_loc = "./triangle_mc"
 

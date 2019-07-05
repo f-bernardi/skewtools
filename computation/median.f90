@@ -15,6 +15,8 @@ implicit none
      integer                            :: i
      double precision, dimension(1:n)     :: xtemp
 
+     !if (.false.) then
+
      ! Handle degenerate cases.
      if (n .eq. 0) then
           med = 0.0d0
@@ -35,5 +37,8 @@ implicit none
      else
           med = xtemp(i+1)
      end if
+
+     !end if
+     !med = 0.0d1
           
 end subroutine median

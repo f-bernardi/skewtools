@@ -91,7 +91,7 @@ cchoose_test: $(TEST)/cchoose_test.f90
 	$(CLEANUP)
 	
 rng_tester: $(TEST)/rng_tester.f90
-	$(FC) $(UTILS)/*.f90 $(COMPS)/*.f90 -o $@ $(TEST)/$@.f90 $(LINKS) $(OTHER)
+	$(FC) $(MODS)/*.f90 $(UTILS)/*.f90 $(COMPS)/*.f90 -o $@ $(TEST)/$@.f90 $(LINKS) $(OTHER)
 	$(CLEANUP)
 
 mt_tester: $(TEST)/mt_tester.f90

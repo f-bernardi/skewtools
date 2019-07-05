@@ -1,4 +1,4 @@
-subroutine my_normal_rng(na,array,mean,variance)
+ subroutine my_normal_rng(na,array,mean,variance)
 ! Populates array size n with normally distributed
 ! random variables with given mean and variance.
 !

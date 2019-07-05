@@ -5,8 +5,8 @@ use HDF5
 use mtmod
 use mod_time
 use mod_duration_estimator
-use mod_triangle_bdry
 use mod_parameters
+use mod_triangle_bdry
 
 implicit none
 
@@ -116,10 +116,11 @@ implicit none
           ! the number of points that are actually simulated is genuinely 
           ! ~nGates, as input from the user's file.
           ! 
-          ! The factor is the ratio of the triangle to its circumscribing square.
+          ! The factor is the ratio of the circumscribing square to the triangle.
           !
           
-          nGates = nGates * (12.0d0/dsqrt(27.0d0))
+          !nGates = nGates * (12.0d0/dsqrt(27.0d0))
+          nGates = nGates * (2.0d0/1.0d0)
                     
           ny = floor(dsqrt(dble(nGates)))+1
           nz = floor(dsqrt(dble(nGates)))+1
@@ -142,7 +143,7 @@ implicit none
      ! The number of points should be approximately ~(pi/4)*ny*nz. 
      ! Sweep the grid and update the values for nGates and nTot,
      ! then allocate memory for X,Y,Z, then fill in the values.
-
+     write(*,*) lls
      call get_pts_in_triangle(ny,nz,x0n,a,nGates,nTot,nl,lls)
 
      ! Internal time
@@ -235,7 +236,7 @@ implicit none
      tt_idx = 1
      ! need to check these bounds - we noticed they were wrong
      call accumulate_moments_2d(tt_idx,ntt,nTot,X,Y,Z, &
-               -1.0d0,-1.0d0+2*a*dsqrt(3.0d0),-a*dsqrt(3.0d0),a*dsqrt(3.0d0), &
+               -a,2.0d0*a,-a*dsqrt(3.0d0),a*dsqrt(3.0d0), &
                means,vars,skews,kurts,nby,nbz,means_sl,vars_sl,skews_sl,kurts_sl)
      call median(nTot,X,medians(tt_idx))
 
@@ -284,7 +285,7 @@ implicit none
           if (t .eq. next_tt) then
 
                call accumulate_moments_2d(tt_idx,ntt,nTot,X,Y,Z, &
-                         -1.0d0,-1.0d0+a*3.0d0,-a*dsqrt(3.0d0),a*dsqrt(3.0d0), &
+                         -a,2.0d0*a,-a*dsqrt(3.0d0),a*dsqrt(3.0d0), &
                          means,vars,skews,kurts,nby,nbz,means_sl,vars_sl,skews_sl,kurts_sl)
                call median(nTot,X,medians(tt_idx))
                
